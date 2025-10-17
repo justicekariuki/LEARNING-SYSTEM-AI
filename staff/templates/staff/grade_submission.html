@@ -1,0 +1,11 @@
+<!-- filepath: d:\WORD\practice\DJANGOPRAC001\mynewtestproject\staff\templates\staff\grade_submission.html -->
+{% block content %}
+  <h2>Grade Submission</h2>
+  <p>Assignment: {{ submission.assignment.title }}</p>
+  <p>Student: {{ submission.student.username }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Grade</button>
+  </form>
+{% endblock %}

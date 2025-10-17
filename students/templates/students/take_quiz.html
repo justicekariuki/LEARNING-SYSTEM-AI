@@ -1,0 +1,34 @@
+<h2>{{ assignment.title }}</h2>
+<form method="post">
+  {% csrf_token %}
+  {% for question in questions %}
+    <div>
+      <p>{{ forloop.counter }}. {{ question.text }}</p>
+      {% if question.question_type == "MCQ" %}
+       <label>
+          <input type="radio" name="question_{{ question.id }}" value="A">
+          {{ question.option_a }}
+        </label><br>
+        <label>
+          <input type="radio" name="question_{{ question.id }}" value="B">
+          {{ question.option_b }}
+        </label><br>
+        {% if question.option_c %}
+          <label>
+            <input type="radio" name="question_{{ question.id }}" value="C">
+            {{ question.option_c }}
+          </label><br>
+        {% endif %}
+        {% if question.option_d %}
+          <label>
+            <input type="radio" name="question_{{ question.id }}" value="D">
+            {{ question.option_d }}
+          </label><br>
+        {% endif %} 
+      {% elif question.question_type == "TEXT" %}
+        <input type="text" name="question_{{ question.id }}">
+      {% endif %}
+    </div>
+  {% endfor %}
+  <button type="submit">Submit Quiz</button>
+</form>

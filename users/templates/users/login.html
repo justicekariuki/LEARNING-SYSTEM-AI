@@ -1,0 +1,12 @@
+<!-- filepath: d:\WORD\practice\DJANGOPRAC001\mynewtestproject\users\templates\users\login.html -->
+{% extends 'users/base.html' %}
+{% block content %}
+<div class="form-container">
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+</div>
+{% endblock %}

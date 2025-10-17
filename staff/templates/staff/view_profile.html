@@ -1,0 +1,10 @@
+<h2>My Profile</h2>
+{% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="150" height="150">
+{% endif %}
+<p><b>Staff ID:</b> {{ profile.staff_id }}</p>
+<p><b>Staff Name:</b> {{ profile.staff_name }}</p>
+<p><b>Department:</b> {{ profile.department }}</p>
+<p><b>Position:</b> {{ profile.position }}</p>
+<p><b>Bio:</b> {{ profile.bio }}</p>
+<a href="{% url 'staff:edit_profile' %}">Edit Profile</a>

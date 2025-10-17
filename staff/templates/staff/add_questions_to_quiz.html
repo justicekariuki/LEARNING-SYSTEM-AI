@@ -1,0 +1,15 @@
+{% block content %}
+  <h2>Add Questions to Quiz: {{ quiz.title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <table>
+      {% for form in formset %}
+        {{ form.as_p }}
+      {% endfor %}
+    </table>
+    <button type="submit">Save Questions</button>
+  </form>
+  <a href="{% url 'staff:list_quizzes' %}">Back to Quizzes</a>
+{% endblock %}
+

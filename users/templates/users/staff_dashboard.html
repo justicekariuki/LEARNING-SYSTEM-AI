@@ -1,0 +1,50 @@
+{% extends 'users/profile.html' %}
+
+{% block content %}
+    <h2>Staff Dashboard</h2>
+    <p>Welcome to the staff dashboard, {{ user.username }}!</p>
+
+    <div style="margin-bottom: 20px;">
+    <button id="profile-button" onclick="toggleMenu('profile-menu')">
+        Profile
+    </button>
+    <div id="profile-menu" style="display:none; position:absolute; background:#f9f9f9; border:1px solid #ccc; padding:10px;">
+        <ul style="list-style:none; margin:0; padding:0;">
+            <li><a href="{% url 'staff:create_profile' %}">Create Profile</a></li>
+            <li><a href="{% url 'staff:view_profile' %}">View Profile</a></li>
+            <li><a href="{% url 'staff:edit_profile' %}">Edit Profile</a></li>
+    </div>
+</div>
+
+<!--MANAGE ASSIGNMENTS-->
+<div style="margin-bottom: 20px;">
+    <button id="assignment-button" onclick="toggleMenu('assignment-menu')">
+        Manage Assignments
+    </button>
+    <div id="assignment-menu" style="display:none; position:absolute; background:#f9f9f9; border:1px solid #ccc; padding:10px;">
+        <ul style="list-style:none; margin:0; padding:0;">
+            <li><a href="{% url 'staff:choose_assignment_type' %}">CREATE ASSIGNMENT</a></li>
+            <li><a href="{% url 'staff:view_submissions' %}">View Submissions</a></li>
+            <li><a href="{% url 'staff:list_quizzes' %}">Manage Quizzes</a></li>
+        </ul>
+    </div>
+</div>
+<!--VIEW ASSIGNED COURSES-->
+<div style="margin-bottom: 20px;">
+    <button id="course-button" onclick="toggleMenu('course-menu')">
+        View Assigned Courses
+    </button>
+    <div id="course-menu" style="display:none; position:absolute; background:#f9f9f9; border:1px solid #ccc; padding:10px;">
+        <ul style="list-style:none; margin:0; padding:0;">
+            <li><a href="{% url 'staff:view_assigned_courses' %}">View Assigned Courses</a></li>
+        </ul>
+    </div>
+</div>
+<script>
+    // Simple JS to toggle the profile menu
+    function toggleMenu(menuId){
+        var menu = document.getElementById(menuId);
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    };
+</script>
+{% endblock %}

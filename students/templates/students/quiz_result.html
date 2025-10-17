@@ -1,0 +1,31 @@
+<h2>Quiz Result: {{ assignment.title }}</h2>
+<p>Your Score: {{ score }} out of {{ total }}</p>
+<ul>
+  {% for question in questions %}
+    <li>
+      <strong>{{ question.text }}</strong><br>
+      {% for response in responses %}
+        {% if response.question.id == question.id %}
+          {% if question.question_type == "MCQ" %}
+            Your answer: {{ response.selected_choice }}<br>
+            {% if response.selected_choice == question.correct_answer %}
+              <span style="color:green;">Correct</span>
+            {% else %}
+              <span style="color:red;">Incorrect</span>
+            {% endif %}
+          {% else %}
+            Your answer: {{ response.answer_text }}
+            {% if response.answer_text == question.answer_text %}
+              <span style="color:green;">Correct</span>
+            {% else %}
+              <span style="color:red;">Incorrect</span>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'students:my_assignments' %}">Back to My Assignments</a>
+<br>
+<a href="{% url 'users:student_dashboard' %}">Student Dashboard</a>

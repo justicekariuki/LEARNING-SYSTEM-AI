@@ -1,0 +1,13 @@
+{% block content %}
+<h2>Enroll in a Course</h2>
+<form method="post">
+  {% csrf_token %}
+  <label for="course">Select a course:</label>
+    <select name="courses" id="courses" multiple required>
+        {% for course in courses %}
+            <option value="{{ course.id }}">{{ course.name }} ({{ course.code }})</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Enroll</button>
+</form>
+{% endblock %}

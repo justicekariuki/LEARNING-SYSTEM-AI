@@ -1,0 +1,9 @@
+
+{% block content %}
+  <h2>Choose Assignment Type</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" name="assignment_type" value="FILE">File Upload Assignment</button>
+    <button type="submit" name="assignment_type" value="QUIZ">Interactive Quiz Assignment</button>
+  </form>
+{% endblock %}

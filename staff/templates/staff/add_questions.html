@@ -1,0 +1,39 @@
+
+{% block content %}
+<h2>Add Question to {{ assignment.title }}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.text.label_tag }} {{ form.text }} <br>
+  
+  {{ form.question_type.label_tag }} {{ form.question_type }} <br>
+
+  <div id="mcq-options" style="display:none;">
+    {{ form.option_a.label_tag }} {{ form.option_a }} <br>
+    {{ form.option_b.label_tag }} {{ form.option_b }} <br>
+    {{ form.option_c.label_tag }} {{ form.option_c }} <br>
+    {{ form.option_d.label_tag }} {{ form.option_d }} <br>
+    {{ form.correct_answer.label_tag }} {{ form.correct_answer }} <br>
+  </div>
+  <button type="submit">Save Question</button>
+</form>
+<a href="{% url 'users:staff_dashboard' %}">Finish Quiz</a>
+{% endblock %}
+
+<script>
+  const questionTypeField = document.getElementById("id_question_type");
+  const mcqOptions = document.getElementById("mcq-options");
+
+  function toggleOptions() {
+    if (questionTypeField.value === "MCQ") {
+      mcqOptions.style.display = "block";
+    } else {
+      mcqOptions.style.display = "none";
+    }
+  }
+
+  // Run on page load
+  toggleOptions();
+
+  // Run when user changes selection
+  questionTypeField.addEventListener("change", toggleOptions);
+</script>

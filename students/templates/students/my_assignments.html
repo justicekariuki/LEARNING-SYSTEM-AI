@@ -1,0 +1,15 @@
+<h2>My Assignments</h2>
+<ul>
+  {% for assignment in assignments %}
+    <li>
+      <a href="{% url 'students:assignment_detail' assignment.id %}">
+        {{ assignment.title }} - {{ assignment.course.name }} (Due: {{ assignment.due_date }})
+        {% if assignment.assignment_type == "QUIZ" %}
+      <a href="{% url 'students:take_quiz' assignment.id %}">Take Quiz</a>
+    {% endif %}
+      </a>
+    </li>
+  {% empty %}
+    <p>No assignments yet.</p>
+  {% endfor %}
+</ul>

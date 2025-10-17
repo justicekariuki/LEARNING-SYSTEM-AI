@@ -1,0 +1,17 @@
+<h2>My Submissions</h2>
+<ul>
+  {% for submission in submissions %}
+    <li>
+      {{ submission.assignment.title }} -
+      Submitted on: {{ submission.submitted_at }} -
+      {% if submission.grade %}
+        Grade: {{ submission.grade }}
+      {% else %}
+        Not graded yet
+      {% endif %}
+    </li>
+  {% empty %}
+    <p>No submissions yet.</p>
+  {% endfor %}
+</ul>
+<a href="{% url 'students:my_assignments' %}">Back to My Assignments</a>

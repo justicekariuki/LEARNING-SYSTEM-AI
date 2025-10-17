@@ -1,0 +1,10 @@
+<h2>My Profile</h2>
+{% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="150" height="150">
+{% endif %}
+<p><b>Admission Number:</b> {{ profile.admission_number }}</p>
+<p><b>Date of Birth:</b> {{ profile.date_of_birth }}</p>
+<p><b>Course:</b> {{ profile.course }}</p>
+<p><b>Year of Study:</b> {{ profile.year_of_study }}</p>
+<p><b>Bio:</b> {{ profile.bio }}</p>
+<a href="{% url 'students:edit_profile' %}">Edit Profile</a>

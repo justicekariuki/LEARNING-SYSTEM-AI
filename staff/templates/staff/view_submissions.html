@@ -1,0 +1,37 @@
+<!-- filepath: d:\WORD\practice\DJANGOPRAC001\mynewtestproject\staff\templates\staff\view_submissions.html -->
+{% block content %}
+  <h2>Assignment Submissions</h2>
+  {% if submissions %}
+    <table>
+      <tr>
+        <th>Assignment</th>
+        <th>Student</th>
+        <th>Submitted At</th>
+        <th>File</th>
+        <th>Status</th>
+      </tr>
+      {% for submission in submissions %}
+      <tr>
+        <td>{{ submission.assignment.title }}</td>
+        <td>{{ submission.student.username }}</td>
+        <td>{{ submission.submitted_at }}</td>
+        <td>
+          {% if submission.file %}
+            <a href="{{ submission.file.url }}">Download</a>
+          {% else %}
+            No file
+          {% endif %}
+        </td>
+        <td>{{ submission.status }}</td>
+        <td>
+            <a href="{% url 'staff:grade_submission' submission.id %}">Grade</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>No submissions found.</p>
+  {% endif %}
+{% endblock %}
+<br>
+<a href="{% url 'users:staff_dashboard' %}">Staff Dashboard</a>

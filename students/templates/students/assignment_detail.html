@@ -1,0 +1,21 @@
+<h2>{{ assignment.title }}</h2>
+<p>Course: {{ assignment.course.name }}</p>
+<p>{{ assignment.description }}</p>
+<p>Due: {{ assignment.due_date }}</p>
+{% if assignment.assignment_type == "QUIZ" %}
+  <h3>Questions:</h3>
+  <ul>
+    {% for question in questions %}
+      <li>{{ question.text }}</li>
+    {% empty %}
+      <p>No questions added yet.</p>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% if assignment.file %}
+<a href="{{ assignment.file.url }}">Download Assignment File</a>
+{% endif %} 
+<br>
+<a href="{% url 'students:submit_assignment' assignment.id %}">Submit Assignment</a>
+<br>
+<a href="{% url 'students:my_assignments' %}">Back to My Assignments</a>

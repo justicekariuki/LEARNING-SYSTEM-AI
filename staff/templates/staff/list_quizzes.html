@@ -1,0 +1,21 @@
+{% block content %}
+  <h2>Your Quizzes</h2>
+  <ul>
+    {% for quiz in quizzes %}
+      <li>
+        {{ quiz.title }} ({{ quiz.course.name }})
+        <a href="{% url 'staff:add_questions_to_quiz' quiz.id %}">Add Questions</a>
+      </li>
+      <td>
+            <form method="post" style="display: inline;">
+              {% csrf_token %}
+              <input type="hidden" name="quiz_id" value="{{ quiz.id }}">
+              <button type="submit" onclick="return confirm('Are you sure you want to delete this quiz?');">Delete</button>
+            </form>
+          </td>
+    {% empty %}
+      <p>No quizzes found.</p>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'users:staff_dashboard' %}">Back to Dashboard</a>
+{% endblock %}

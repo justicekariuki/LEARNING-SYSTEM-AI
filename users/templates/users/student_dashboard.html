@@ -1,0 +1,93 @@
+{% extends 'users/profile.html' %}
+
+{% block content %}
+    <h2>Student Dashboard</h2>
+    <p>Welcome to the student dashboard, {{ user.username }}!</p>
+    
+    <div style="margin-bottom: 20px;">
+    <button onclick="document.getElementById('profile-menu').classList.toggle('show');">
+        Profile
+    </button>
+    <div id="profile-menu" style="display:none; position:absolute; background:#f9f9f9; border:1px solid #ccc; padding:10px;">
+        <ul style="list-style:none; margin:0; padding:0;">
+            <li><a href="{% url 'students:create_profile' %}">Create Profile</a></li>
+            <li><a href="{% url 'students:edit_profile' %}">Edit Profile</a></li>
+            <li><a href="{% url 'students:view_profile' %}">View Profile</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--ENROLL COURSE MENU-->
+<div style="margin-bottom: 20px;">
+        <button onclick="document.getElementById('enroll-menu').classList.toggle('show');">
+            Courses
+        </button>
+        <div id="enroll-menu" style="display:none; position:absolute; background:#f9f9f9; border:1px solid #ccc; padding:10px;">
+            <ul style="list-style:none; margin:0; padding:0;">
+                <li><a href="{% url 'students:enroll_course' %}">Enroll in a Course</a></li>
+                <li><a href="{% url 'students:my_courses' %}">My Courses</a></li>
+               
+            </ul>
+        </div>
+    </div>
+
+    <!-- GRADES MENU -->
+<div style="margin-bottom: 20px;">
+    <button onclick="document.getElementById('grades-menu').classList.toggle('show');">
+        Grades
+    </button>
+    <div id="grades-menu" style="display:none; position:absolute; background:#f9f9f9; border:1px solid #ccc; padding:10px;">
+        <ul style="list-style:none; margin:0; padding:0;">
+            <li><a href="{% url 'students:view_grades' %}">View Grades</a></li>
+        </ul>
+    </div>
+</div>
+<!-- ASSIGNMENTS MENU -->
+<div style="margin-bottom: 20px;">
+    <button onclick="document.getElementById('assignments-menu').classList.toggle('show');">
+        Assignments
+    </button>
+    <div id="assignments-menu" style="display:none; position:absolute; background:#f9f9f9; border:1px solid #ccc; padding:10px;">
+        <ul style="list-style:none; margin:0; padding:0;">
+            <li><a href="{% url 'students:my_assignments' %}">My Assignments</a></li>
+            <li>
+                {% for assignment in assignments %}
+    <a href="{% url 'students:view_assignment' assignment_id=assignment.id %}">
+        {{ assignment.name }}
+    </a>
+    
+    <a href="{% url 'students:submit_assignment' assignment_id=assignment.id %}">Submit</a>
+    <br>
+    {% empty %}
+    <p>No assignments available.</p>
+{% endfor %}
+</li>
+<li><a href="{% url 'students:my_submissions' %}">My submissions</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Simple JS to toggle the profile menu
+    document.querySelector('button').onclick = function() {
+        var menu = document.getElementById('profile-menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    };
+
+    // Toggle enroll menu
+        document.querySelectorAll('button')[1].onclick = function() {
+            var menu = document.getElementById('enroll-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        };
+    // Toggle grades menu
+    document.querySelectorAll('button')[2].onclick = function() {
+        var menu = document.getElementById('grades-menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    };
+    // Toggle assignments menu
+    document.querySelectorAll('button')[3].onclick = function() {
+        var menu = document.getElementById('assignments-menu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    };
+</script>
+{% endblock %}

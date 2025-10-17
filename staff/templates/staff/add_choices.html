@@ -1,0 +1,10 @@
+{% block content %}
+<h2>Add Choices for Question: {{ question.text }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Choice</button>
+    <button type="submit" name="add_another">Add Another Choice</button>
+</form>
+<a href="{% url 'staff:add_questions' assignment_id=question.assignment.id %}">Done Adding Choices</a>
+{% endblock %}
